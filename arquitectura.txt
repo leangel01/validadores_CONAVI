@@ -1,14 +1,23 @@
 validador_excel/
 │
 ├── catalogos/
-│   ├── reglas_comunes.json      # Catálogos maestros (Estados, Municipios, etc.)
-│   └── reglas_procesos.json     # Reglas específicas por tipo de operación
+│   ├── reglas_comunes.json      # Sinónimos y mapeos globales
+│   └── reglas_procesos.json     # Estructuras de layouts y umbrales por proceso
 │
 ├── core/
 │   ├── __init__.py
-│   ├── base.py                  # Clase base abstracta (Funcionalidad compartida)
-│   ├── factory.py               # Enrutador / Fábrica de validadores
-│   └── validators/              # Validadores específicos
+│   ├── common_rules.py          # Reglas atómicas de negocio (CURP, UMAs, edad)
+│   ├── base.py                  # Clase base para validadores
+│   ├── factory.py               # Fábrica principal (orquesta Reader + Validator)
+│   │
+│   ├── readers/                 # <-- MÓDULO DE LECTORES ESPECIALIZADOS
+│   │   ├── __init__.py
+│   │   ├── base.py              # Clase Base Abstracta para lectores
+│   │   ├── aprobaciones.py      # Lector específico (34 columnas)
+│   │   ├── modificaciones.py    # Lector específico (layout modificaciones)
+│   │   └── cancelaciones.py     # Lector específico (layout cancelaciones)
+│   │
+│   └── validators/              # MÓDULO DE REGLAS DE NEGOCIO
 │       ├── __init__.py
 │       ├── aprobaciones.py
 │       ├── modificaciones.py
