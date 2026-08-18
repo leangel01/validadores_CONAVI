@@ -1,17 +1,20 @@
-from core.validators.aprobaciones import AprobacionesValidator
-from core.validators.modificaciones import ModificacionesValidator
-from core.validators.cancelaciones import CancelacionesValidator
+from core.readers.aprobaciones import AprobacionesReader
+from core.validadores.aprobaciones import AprobacionesValidator
 
-class ValidatorFactory:
-    @staticmethod
-    def get_validator(tipo_proceso: str, ruta_comunes: str, ruta_procesos: str):
-        proceso = tipo_proceso.lower().strip()
-        
-        if proceso == "aprobaciones":
-            return AprobacionesValidator(ruta_comunes, ruta_procesos)
-        elif proceso == "modificaciones":
-            return ModificacionesValidator(ruta_comunes, ruta_procesos)
-        elif proceso == "cancelaciones":
-            return CancelacionesValidator(ruta_comunes, ruta_procesos)
-        else:
-            raise ValueError(f"Tipo de proceso no reconocido: '{tipo_proceso}'")
+class ProcessFactory:
+    _REGISTRO = {
+        "APROBACIONES": {
+            "reader": AprobacionesReader,
+            "validator": AprobacionesValidator
+        }
+        # Próximamente: "MODIFICACIONES", "CANCELACIONES"
+    }
+
+    @classmethod
+    def obtener_componentes(cls, tipo_proceso: str):
+        key = tipo_proceso.upper().strip()
+        if key not in cls._REGISTRO:
+            raise ValueError(f"Proceso '{tipo_proceso}' no registrado. Opciones: {list(cls._REGISTRO.keys())}")
+
+        comp = cls._REGISTRO[key]
+        return comp["reader"](), comp["validator"]

@@ -5,7 +5,7 @@ from tkinter import filedialog
 import pandas as pd
 from typing import Union
 
-class ExcelReader:
+class AprobacionesReader:
     def __init__(self, ruta_comunes: str = "catalogos/reglas_comunes.json"):
         if not os.path.exists(ruta_comunes):
             raise FileNotFoundError(f"No se encontró el archivo de reglas comunes: {ruta_comunes}")
