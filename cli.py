@@ -1,5 +1,6 @@
 from core.readers.aprobaciones import seleccionar_archivo
 from core.factory import ProcessFactory
+from pathlib import Path
 
 def main():
     print("=== SISTEMA DE VALIDACIÓN (MÓDULO APROBACIONES) ===")
@@ -19,6 +20,10 @@ def main():
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
         df_resultado = validador.validar()
+
+        ruta_salida = Path(ruta).with_name(f"{Path(ruta).stem}_resultado.xlsx")
+        df_resultado.to_excel(ruta_salida, index=False, sheet_name="APROBACIONES")
+        print(f"Resultado guardado en: {ruta_salida}")
 
         print("\n--- RESUMEN DE PROCESAMIENTO ---")
         print(f"Total registros: {len(df_resultado)}")
