@@ -2,10 +2,8 @@ import pandas as pd
 from datetime import datetime
 from typing import Tuple
 
-# Referencia UMA 2026 en México (Diaria: ~$113.14 -> Mensual: ~$3,439.46)
-UMA_DIARIA = 113.14
-DIAS_MES = 30.4
-UMA_MENSUAL_DEFAULT = UMA_DIARIA * DIAS_MES
+# Referencia UMA mensual 2026 
+UMA_MENSUAL_DEFAULT =  3566.22
 
 def extraer_fecha_nacimiento_curp(curp: str) -> Tuple[datetime, bool]:
     """Extrae la fecha de nacimiento a partir de la estructura del CURP."""
