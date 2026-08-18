@@ -1,0 +1,18 @@
+validador_excel/
+│
+├── catalogos/
+│   ├── reglas_comunes.json      # Catálogos maestros (Estados, Municipios, etc.)
+│   └── reglas_procesos.json     # Reglas específicas por tipo de operación
+│
+├── core/
+│   ├── __init__.py
+│   ├── base.py                  # Clase base abstracta (Funcionalidad compartida)
+│   ├── factory.py               # Enrutador / Fábrica de validadores
+│   └── validators/              # Validadores específicos
+│       ├── __init__.py
+│       ├── aprobaciones.py
+│       ├── modificaciones.py
+│       └── cancelaciones.py
+│
+├── cli.py                       # Interfaz de comandos
+└── requirements.txt

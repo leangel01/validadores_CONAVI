@@ -1,0 +1,46 @@
+{
+  "uma_vigente": {
+    "diaria": 113.14,
+    "mensual": 3439.46,
+    "anual": 41273.52
+  },
+  "topes_elegibilidad": {
+    "max_umas_ingreso_mensual": 5.0
+  },
+  "mapeo_columnas": {
+    "no.":["NO."],
+    "programa":["PROGRAMA"],
+    "proyecto":["PROYECTO/LOTE"],
+    "esquema":["ESQUEMA OPERATIVO"],
+    "modalidad":["MODALIDAD"],
+    "entidad":["ENTIDAD"],
+    "municipio":["MUNICIPIO"],
+    "localidad":["LOCALIDAD"],
+    "apellido_paterno":["AP PATERNO"],
+    "apellido_materno":["AP MATERNO"],
+    "nombre":["NOMBRE"],
+    "curp":["CURP"],
+    "ingresos":[" INGRESO MENSUAL ","INGRESO MENSUAL"],
+    "apoyo_unico":["APOYO ÚNICO"],
+    "linea_apoyo":["LÍNEA_AP"],
+    "monto_linea_apoyo":["MONTO LÍNEA_AP"],
+    "linea_c1":["LÍNEA_C1"],
+    "monto_linea_c1":["MONTO LÍNEA_C1"],
+    "linea_c2":["LÍNEA_C2"],
+    "monto_linea_c2":["MONTO LÍNEA_C2"],
+    "linea_c3":["LÍNEA_C3"],
+    "monto_linea_c3":["MONTO LÍNEA_C3"],
+    "linea_c4":["LÍNEA_C4"],
+    "monto_linea_c4":["MONTO LÍNEA_C4"],
+    "linea_c5":["LÍNEA_C5"],
+    "monto_linea_c5":["MONTO LÍNEA_C5"],
+    "linea_c6":["LÍNEA_C6"],
+    "monto_linea_c6":["MONTO LÍNEA_C6"],
+    "monto_aprobado":["MONTO APROBADO"],
+    "proceso_constructivo":["PROCESO CONSTRUCTIVO"],
+    "prestador_servicios":["PRESTADOR DE SERVICIOS"],
+    "supervisor":["SUPERVISOR"],
+    "proyectista":["PROYECTISTA"],
+    "observaciones":["OBSERVACIONES"]
+  }
+}
