@@ -73,4 +73,4 @@ def validar_tope_ingresos_uma(df: pd.DataFrame, col_ingresos: str = 'ingresos', 
     ingresos = pd.to_numeric(df[col_ingresos], errors='coerce').fillna(0.0)
     tope_maximo = max_umas * uma_mensual
     
-    return (ingresos > 0) & (ingresos <= tope_maximo)
+    return (ingresos >= 0) & (ingresos <= tope_maximo)

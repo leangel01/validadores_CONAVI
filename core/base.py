@@ -41,7 +41,7 @@ class BaseValidator(ABC):
         df_res.loc[~mask_curp_ok, 'observaciones_sistema'] += '[ERR: Formato de CURP Inválido] '
         df_res.loc[mask_curp_ok & ~mask_edad_ok, 'observaciones_sistema'] += f'[ERR: Beneficiario menor de {edad_min} años] '
 
-        # Se comprueba que el ingreso sea positivo y esté dentro del límite.
+        # Se comprueba que el ingreso sea positivo incluyendo cero y esté dentro del límite.
         # El valor de la UMA se obtiene del catálogo de reglas comunes.
         max_umas = self.config.get(
             "max_umas_ingreso",
@@ -53,7 +53,7 @@ class BaseValidator(ABC):
             max_umas=max_umas,
             uma_mensual=self.uma_mensual
         )
-        df_res.loc[~mask_ingresos, 'observaciones_sistema'] += f'[ERR: Ingreso supera el tope de {max_umas} UMAs o es 0] '
+        df_res.loc[~mask_ingresos, 'observaciones_sistema'] += f'[ERR: Ingreso supera el tope de {max_umas} UMAs] '
 
         return df_res
 
