@@ -6,7 +6,17 @@ El flujo de ejecuciín es:
     - Se ejecutan las reglas de validación,
     -Se exportan los errores en un documento de excel y,
     - Se muestra un resumen en la consola.
-Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la incorporación de validaciones para MODIFICACIONES y CANCELACIONES.
+
+    
+Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la incorporación de validaciones para MODIFICACIONES.
+
+
+- Respecto a la validación de los ingresos con valores iguales a cero no se tomarán como error, ya que 'en las ROPs no se establece que estos deben de 
+  ser superiores a algún monto en específico'.
+  Adicionalmente, se incorporan las lineas complementarias que no cuentan con un tope de monto, estas unicamente se validarán en cuanto a la
+  alineacion que deben de tener, porque al igual que pasa con la edad, las ROPs no establecen los montos maximos para estos casos.
+- En cuanto a la validacion de las MODIFICACIONES, solo se realzarán sobre los montos tope, se validadran tanto los montos anteriores
+  como los nuevos. en caso de modificaciones de benficiarios localidad etc. esos no se validarán.
 """
 
 from core.readers.aprobaciones import seleccionar_archivo
