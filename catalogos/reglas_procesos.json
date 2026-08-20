@@ -1,0 +1,307 @@
+{
+  "lineas_autorizadas_pvs": {
+    "COFINANCIAMIENTO CON CRÉDITO|ADQUISICIÓN|ADQUISICIÓN DE VIVIENDA NUEVA": {
+      "uma_la": 190.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|ADQUISICIÓN|ADQUISICIÓN DE VIVIENDA NUEVA": {
+      "uma_la": 170.0,
+      "complementarias_permitidas": {}
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|ADQUISICIÓN|ADQUISICIÓN DE VIVIENDA EN USO": {
+      "uma_la": 30.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|ADQUISICIÓN|ADQUISICIÓN DE VIVIENDA EN USO": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {}
+    },
+    "VIVIENDA PARA EL BIENESTAR|ADQUISICIÓN|EDIFICACIÓN DE CONJUNTO HABITACIONAL": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "ESPACIO AUXILIAR PRODUCTIVO": 25.0,
+        "ESTUDIOS Y DICTÁMENES": 20.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRAS EXTERIORES": 90.0,
+        "TRÁMITES LEGALES": 16.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|AUTOPRODUCCIÓN|MEJORAMIENTO DE VIVIENDA": {
+      "uma_la": 25.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|AUTOPRODUCCIÓN|AMPLIACIÓN DE VIVIENDA": {
+      "uma_la": 50.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|AUTOPRODUCCIÓN|VIVIENDA NUEVA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|AUTOPRODUCCIÓN|REHABILITACIÓN DE VIVIENDA EDIFICADA CON SISTEMAS CONSTRUCTIVOS TRADICIONALES": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|AUTOPRODUCCIÓN|MEJORAMIENTO DE VIVIENDA": {
+      "uma_la": 25.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|AUTOPRODUCCIÓN|AMPLIACIÓN DE VIVIENDA": {
+      "uma_la": 50.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|AUTOPRODUCCIÓN|VIVIENDA NUEVA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|AUTOPRODUCCIÓN|REHABILITACIÓN DE VIVIENDA EDIFICADA CON SISTEMAS CONSTRUCTIVOS TRADICIONALES": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|AUTOPRODUCCIÓN|MEJORAMIENTO DE VIVIENDA": {
+      "uma_la": 25.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|AUTOPRODUCCIÓN|AMPLIACIÓN DE VIVIENDA": {
+      "uma_la": 50.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|AUTOPRODUCCIÓN|VIVIENDA NUEVA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|AUTOPRODUCCIÓN|REHABILITACIÓN DE VIVIENDA EDIFICADA CON SISTEMAS CONSTRUCTIVOS TRADICIONALES": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE SUELO": {
+      "uma_la": 86.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE SUELO": {
+      "uma_la": 86.0,
+      "complementarias_permitidas": {}
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|VIVIENDA NUEVA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|VIVIENDA NUEVA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE VIVIENDA NUEVA": {
+      "uma_la": 170.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE VIVIENDA NUEVA": {
+      "uma_la": 170.0,
+      "complementarias_permitidas": {}
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE VIVIENDA EN USO": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE VIVIENDA EN USO": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {}
+    },
+    "VIVIENDA PARA EL BIENESTAR|REUBICACIÓN DE VIVIENDA|EDIFICACIÓN DE CONJUNTO HABITACIONAL": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0,
+        "OBRAS EXTERIORES": 90.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|EDIFICACIÓN DE CONJUNTO HABITACIONAL": {
+      "uma_la": 140.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0,
+        "OBRAS EXTERIORES": 90.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|RECONSTRUCCIÓN|REHABILITACIÓN DE VIVIENDA CON VALOR PATRIMONIAL": {
+      "uma_la": 270.0,
+      "complementarias_permitidas": {
+        "OBRA PREVENTIVA": 30.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|RECONSTRUCCIÓN|RECONSTRUCCIÓN PARCIAL DE VIVIENDA": {
+      "uma_la": 50.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|RECONSTRUCCIÓN|RECONSTRUCCIÓN TOTAL DE VIVIENDA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|RECONSTRUCCIÓN|REHABILITACIÓN DE VIVIENDA EDIFICADA CON SISTEMAS CONSTRUCTIVOS TRADICIONALES": {
+      "uma_la": 75.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|RECONSTRUCCIÓN|REHABILITACIÓN DE VIVIENDA CON VALOR PATRIMONIAL": {
+      "uma_la": 270.0,
+      "complementarias_permitidas": {
+        "OBRA PREVENTIVA": 30.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|RECONSTRUCCIÓN|RECONSTRUCCIÓN PARCIAL DE VIVIENDA": {
+      "uma_la": 50.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "REFORZAMIENTO ESTRUCTURAL": 30.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|RECONSTRUCCIÓN|RECONSTRUCCIÓN TOTAL DE VIVIENDA": {
+      "uma_la": 100.0,
+      "complementarias_permitidas": {
+        "ACCESIBILIDAD": 13.0,
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "SUBSIDIO 100% CONAVI|RECONSTRUCCIÓN|REHABILITACIÓN DE VIVIENDA EDIFICADA CON SISTEMAS CONSTRUCTIVOS TRADICIONALES": {
+      "uma_la": 75.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 20.0,
+        "OBRA PREVENTIVA": 30.0,
+        "DEMOLICIÓN Y DESMANTELAMIENTO": 17.0,
+        "SUMINISTRO Y ACARREO DE MATERIALES": 20.0
+      }
+    },
+    "COFINANCIAMIENTO CON CRÉDITO|MEJORAMIENTO INTEGRAL SUSTENTABLE|MEJORAMIENTO SUSTENTABLE DE LA VIVIENDA": {
+      "uma_la": 25.0,
+      "complementarias_permitidas": {}
+    },
+    "SUBSIDIO 100% CONAVI|MEJORAMIENTO DE UNIDADES HABITACIONALES|MEJORAMIENTO DE INSTALACIONES GENERALES Y ÁREAS COMUNES": {
+      "uma_la": 4.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 10.0
+      }
+    },
+    "COFINANCIAMIENTO SIN CRÉDITO|MEJORAMIENTO DE UNIDADES HABITACIONALES|MEJORAMIENTO DE INSTALACIONES GENERALES Y ÁREAS COMUNES": {
+      "uma_la": 4.0,
+      "complementarias_permitidas": {
+        "SUSTENTABILIDAD": 10.0
+      }
+    }
+  }
+}

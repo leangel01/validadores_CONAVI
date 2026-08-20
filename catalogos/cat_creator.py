@@ -3,8 +3,8 @@ import json
 import pandas as pd
 
 def generar_reglas_procesos_json(
-    ruta_excel: str = "CATALOGO_LINEAS_VALIDAS_17082026.xlsx",
-    ruta_salida: str = "catalogos/reglas_procesos.json"
+    ruta_excel: str = "./catalogos/CATALOGO_LINEAS_VALIDAS_17082026.xlsx",
+    ruta_salida: str = "./catalogos/reglas_procesos.json"
 ):
     """
     Lee todas las pestañas del Catálogo Maestro PVS, consolida y limpia

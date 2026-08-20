@@ -20,9 +20,16 @@ def main():
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
         df_resultado = validador.validar()
+        df_salida = df_resultado.loc[
+            ~df_resultado['es_valido'], ['no.', 'curp', 'observaciones_sistema']
+        ].copy()
+        df_salida['observaciones_sistema'] = df_salida['observaciones_sistema'].str.findall(
+            r'\[ERR:.*?\]'
+        )
+        df_salida = df_salida.explode('observaciones_sistema', ignore_index=True)
 
         ruta_salida = Path(ruta).with_name(f"{Path(ruta).stem}_resultado.xlsx")
-        df_resultado.to_excel(ruta_salida, index=False, sheet_name="APROBACIONES")
+        df_salida.to_excel(ruta_salida, index=False, sheet_name="APROBACIONES")
         print(f"Resultado guardado en: {ruta_salida}")
 
         print("\n--- RESUMEN DE PROCESAMIENTO ---")
@@ -33,7 +40,7 @@ def main():
         df_errores = df_resultado[~df_resultado['es_valido']]
         if not df_errores.empty:
             print("\nPrimeros registros con errores:")
-            print(df_errores[['curp', 'ingresos', 'observaciones_sistema']].head())
+            print(df_errores[['curp', 'observaciones_sistema']].head())
 
     except Exception as e:
         print(f"\n[Error durante el proceso]: {e}")

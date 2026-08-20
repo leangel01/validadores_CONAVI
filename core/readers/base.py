@@ -1,4 +1,4 @@
-    from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 import pandas as pd
 import tkinter as tk
 from tkinter import filedialog

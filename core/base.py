@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
+import json
+from pathlib import Path
+
 import pandas as pd
 from core.common_rules import (
     validar_unicidad_curp,
@@ -10,6 +13,10 @@ class BaseValidator(ABC):
     def __init__(self, df: pd.DataFrame, config: dict = None):
         self.df = df.copy()
         self.config = config or {}
+        ruta_reglas = Path(__file__).resolve().parents[1] / 'catalogos' / 'reglas_comunes.json'
+        with ruta_reglas.open('r', encoding='utf-8') as archivo:
+            self.reglas_comunes = json.load(archivo)
+        self.uma_mensual = self.reglas_comunes['uma_vigente']['mensual']
 
     def _ejecutar_validaciones_comunes(self, df_res: pd.DataFrame) -> pd.DataFrame:
         # 1. Unicidad de CURP
@@ -23,8 +30,16 @@ class BaseValidator(ABC):
         df_res.loc[mask_curp_ok & ~mask_edad_ok, 'observaciones_sistema'] += f'[ERR: Beneficiario menor de {edad_min} años] '
 
         # 3. Ingresos <= 5 UMAs
-        max_umas = self.config.get("max_umas_ingreso", 5.0)
-        mask_ingresos = validar_tope_ingresos_uma(df_res, col_ingresos='ingresos', max_umas=max_umas)
+        max_umas = self.config.get(
+            "max_umas_ingreso",
+            self.reglas_comunes['topes_elegibilidad']['max_umas_ingreso_mensual']
+        )
+        mask_ingresos = validar_tope_ingresos_uma(
+            df_res,
+            col_ingresos='ingresos',
+            max_umas=max_umas,
+            uma_mensual=self.uma_mensual
+        )
         df_res.loc[~mask_ingresos, 'observaciones_sistema'] += f'[ERR: Ingreso supera el tope de {max_umas} UMAs o es 0] '
 
         return df_res
