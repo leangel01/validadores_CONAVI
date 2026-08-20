@@ -1,8 +1,20 @@
+"""Módulo principal para ejecutar la validación de los archivos.
+
+El flujo de ejecuciín es:
+    - Se pide el archivo,
+    - Se leen los datos,
+    - Se ejecutan las reglas de validación,
+    -Se exportan los errores en un documento de excel y,
+    - Se muestra un resumen en la consola.
+Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la incorporación de validaciones para MODIFICACIONES y CANCELACIONES.
+"""
+
 from core.readers.aprobaciones import seleccionar_archivo
 from core.factory import ProcessFactory
 from pathlib import Path
 
 def main():
+
     print("=== SISTEMA DE VALIDACIÓN (MÓDULO APROBACIONES) ===")
     
     ruta = seleccionar_archivo()
@@ -11,15 +23,16 @@ def main():
         return
 
     try:
-        # Instanciar mediante la fábrica
+
         reader, ValidatorClass = ProcessFactory.obtener_componentes("APROBACIONES")
-        
+
         print("Cargando y estructurando plantilla...")
         df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja="APROBACIONES")
-        
+
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
         df_resultado = validador.validar()
+        # Se seleccionan solo los registros inválidos y las columnas útiles para revisarlos.
         df_salida = df_resultado.loc[
             ~df_resultado['es_valido'], ['no.', 'curp', 'observaciones_sistema']
         ].copy()
@@ -32,6 +45,7 @@ def main():
         df_salida.to_excel(ruta_salida, index=False, sheet_name="APROBACIONES")
         print(f"Resultado guardado en: {ruta_salida}")
 
+        # Muestra un resumen para que el usuario conozca el resultado sin abrir el Excel.
         print("\n--- RESUMEN DE PROCESAMIENTO ---")
         print(f"Total registros: {len(df_resultado)}")
         print(f"VÁLIDOS: {df_resultado['es_valido'].sum()}")

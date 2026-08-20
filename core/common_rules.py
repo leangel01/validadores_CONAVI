@@ -1,12 +1,21 @@
+"""Reglas que pueden reutilizarse en distintos procesos.
+
+Se concentran aquí las comprobaciones de CURP, edad e ingresos para que cada
+validador específico no tenga que duplicarlas.
+"""
+
 import pandas as pd
 from datetime import datetime
 from typing import Tuple
 
-# Referencia UMA mensual 2026 
+# Este valor de la UMA es una referencia de respaldo por si otro módulo no proporciona el valor.
 UMA_MENSUAL_DEFAULT =  3566.22
 
 def extraer_fecha_nacimiento_curp(curp: str) -> Tuple[datetime, bool]:
-    """Extrae la fecha de nacimiento a partir de la estructura del CURP."""
+    """
+    Se extrae la fecha de nacimiento a partir de la CURP.
+    También se valida su longitud.
+    """
     try:
         curp = str(curp).strip().upper()
         if len(curp) != 18:
@@ -24,7 +33,7 @@ def extraer_fecha_nacimiento_curp(curp: str) -> Tuple[datetime, bool]:
         return None, False
 
 def validar_unicidad_curp(df: pd.DataFrame, col_curp: str = 'curp') -> pd.Series:
-    """Valida que la CURP no esté duplicada en la plantilla."""
+    """Marca como válidas las CURP que no aparecen repetidas."""
     if col_curp not in df.columns:
         return pd.Series(True, index=df.index)
     
@@ -33,7 +42,12 @@ def validar_unicidad_curp(df: pd.DataFrame, col_curp: str = 'curp') -> pd.Series
     return ~es_duplicado
 
 def validar_mayoria_edad(df: pd.DataFrame, col_curp: str = 'curp', edad_minima: int = 18) -> Tuple[pd.Series, pd.Series]:
-    """Retorna (mask_curp_valida, mask_cumple_edad)."""
+    """Se comprueba que cada CURP cumpla la edad mínima.
+
+    Devuelve dos máscaras alineadas con el índice del DataFrame original:
+    la primera, si la CURP contiene una fecha válida; y la segunda, si la persona
+    alcanza la edad mínima en la fecha actual.
+    """
     hoy = datetime.now()
     curp_ok_list = []
     edad_ok_list = []
@@ -52,7 +66,7 @@ def validar_mayoria_edad(df: pd.DataFrame, col_curp: str = 'curp', edad_minima: 
     return pd.Series(curp_ok_list, index=df.index), pd.Series(edad_ok_list, index=df.index)
 
 def validar_tope_ingresos_uma(df: pd.DataFrame, col_ingresos: str = 'ingresos', max_umas: float = 5.0, uma_mensual: float = UMA_MENSUAL_DEFAULT) -> pd.Series:
-    """Valida que el ingreso mensual sea mayor a 0 y no supere el tope de UMAs."""
+    """Comprueba que el ingreso sea positivo y no supere el tope de cinco UMAs mensuales."""
     if col_ingresos not in df.columns:
         return pd.Series(False, index=df.index)
 

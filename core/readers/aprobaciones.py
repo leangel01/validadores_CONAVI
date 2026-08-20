@@ -1,3 +1,10 @@
+"""
+Modulo lector y selector del archivo de aprobaciones.
+
+Convierte la plantilla Excel o CSV, aunque tenga filas preliminares y
+encabezados variables, en un ``DataFrame`` con nombres y tipos uniformes.
+"""
+
 import os
 import json
 import tkinter as tk
@@ -6,7 +13,10 @@ import pandas as pd
 from typing import Union
 
 class AprobacionesReader:
+    """Convierte la plantilla Excel o CSV en un DataFrame con nombres y tipos uniformes."""
+
     def __init__(self, ruta_comunes: str = "catalogos/reglas_comunes.json"):
+        """Carga el mapeo de columnas y clasifica los campos numéricos."""
         if not os.path.exists(ruta_comunes):
             raise FileNotFoundError(f"No se encontró el archivo de reglas comunes: {ruta_comunes}")
 
@@ -15,35 +25,32 @@ class AprobacionesReader:
 
         self.mapa_columnas = config.get("mapeo_columnas", {})
         
-        # Extraer sinónimos en mayúsculas
+        # Normaliza los sinónimos para reconocer encabezados sin importar su formato.
         self.sinonimos_catalogos = {
             str(sin).strip().upper()
             for sinonimos in self.mapa_columnas.values()
             for sin in sinonimos
         }
 
-        # Definir claves numéricas basadas exactamente en las 34 del JSON
+        # Normaliza los campos que deben convertirse a números.
         self.cols_numericas = [
             "ingresos", "apoyo_unico", "monto_linea_apoyo", "monto_aprobado"
         ] + [f"monto_linea_c{i}" for i in range(1, 7)]
 
     def _encontrar_y_ajustar_encabezados(self, df_raw: pd.DataFrame) -> pd.DataFrame:
-        """
-        Localiza la última fila de encabezados antes de que inicien los datos reales.
-        """
+        """Localiza la última fila de encabezados antes de los datos reales."""
         fila_header = None
 
         for idx in range(min(len(df_raw), 30)):
             valores_fila = [str(v).strip().upper() for v in df_raw.iloc[idx].values if pd.notna(v)]
             
-            # Revisa si la fila contiene sinónimos del catálogo (como 'NO.')
+            # Normalizo los encabezados para reconocerlos sin importar su formato.
             tiene_sinonimos = any(val in self.sinonimos_catalogos for val in valores_fila)
             
             if tiene_sinonimos:
                 fila_header = idx
             elif fila_header is not None:
-                # Si ya habíamos encontrado un encabezado y esta fila no lo es,
-                # verificamos si es una fila de datos para detener la búsqueda
+                # Se detiene la búsqueda cuando parece que ya comenzaron los datos.
                 primer_val = str(df_raw.iloc[idx, 0]).strip() if pd.notna(df_raw.iloc[idx, 0]) else ""
                 if primer_val != "" and primer_val.upper() != "NO.":
                     break
@@ -57,10 +64,7 @@ class AprobacionesReader:
         return df_raw
 
     def _estandarizar_y_filtrar_columnas(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Mapea las columnas al estándar y filtra el DataFrame para mantener
-        EXACTAMENTE las 34 columnas del JSON.
-        """
+        """Renombra columnas y conserva exactamente el layout configurado."""
         renombrar = {}
         columnas_archivo = [str(col).strip().upper() for col in df.columns]
         df.columns = columnas_archivo
@@ -74,15 +78,16 @@ class AprobacionesReader:
 
         df = df.rename(columns=renombrar)
 
-        # Garantizar que existan las 34 columnas esperadas
+        # Se crean las columnas faltantes para mantener un esquema estable.
         for std_name in self.mapa_columnas.keys():
             if std_name not in df.columns:
                 df[std_name] = None
 
-        # Filtrar y ordenar para retornar SOLO las 34 columnas del JSON
+        # Se filtran y ordenan para entregar únicamente las columnas esperadas.
         return df[list(self.mapa_columnas.keys())]
 
     def cargar_y_preparar(self, ruta_archivo: str, nombre_hoja: Union[str, int] = "APROBACIONES") -> pd.DataFrame:
+        """Lee, limpia el documento de las aprobaciones."""
         if not os.path.exists(ruta_archivo):
             raise FileNotFoundError(f"No se encontró el archivo a validar: {ruta_archivo}")
 
@@ -95,23 +100,23 @@ class AprobacionesReader:
         else:
             raise ValueError(f"Formato no soportado '{ext}'. Formatos válidos: .xlsx, .xls, .csv")
 
-        # 1. Encontrar la fila del encabezado 'NO.' real
+        # Separa las filas preliminares del encabezado real.
         df = self._encontrar_y_ajustar_encabezados(df_raw)
 
-        # 2. Renombrar y recortar exactamente a las 34 columnas
+        # Convierte el layout externo al esquema interno del sistema.
         df = self._estandarizar_y_filtrar_columnas(df)
 
-        # 3. Eliminar filas vacías o repetidas de encabezados residuales
+        # Retira filas que no representan registros.
         df = df.dropna(how='all').reset_index(drop=True)
         if 'no.' in df.columns:
             df = df[df['no.'].astype(str).str.strip().str.upper() != 'NO.'].reset_index(drop=True)
 
-        # 4. Formatear columnas de texto
+        # Normaliza texto para que las comparaciones de reglas sean consistentes.
         cols_texto = [k for k in self.mapa_columnas.keys() if k not in self.cols_numericas]
         for col in cols_texto:
             df[col] = df[col].fillna('').astype(str).str.replace(r'\.0$', '', regex=True).str.strip()
 
-        # 5. Formatear columnas numéricas
+        # Convierte importes a números y valores inválidos como cero.
         for col in self.cols_numericas:
             df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0.0)
 
@@ -119,6 +124,7 @@ class AprobacionesReader:
 
 
 def seleccionar_archivo() -> str:
+    """Muestra el diálogo usado por la interfaz para elegir el archivo."""
     root = tk.Tk()
     root.withdraw()
     root.attributes('-topmost', True)
@@ -136,6 +142,7 @@ def seleccionar_archivo() -> str:
     return ruta_archivo
 
 
+'''
 if __name__ == "__main__":
     archivo_seleccionado = seleccionar_archivo()
 
@@ -154,3 +161,4 @@ if __name__ == "__main__":
             
         except Exception as e:
             print(f"\n[Error] No se pudo procesar el archivo: {e}")
+'''
