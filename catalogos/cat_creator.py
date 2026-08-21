@@ -32,6 +32,7 @@ def generar_reglas_procesos_json(
     for col in cols_texto:
         master_df[col] = master_df[col].fillna('').astype(str).str.strip().str.upper()
 
+    master_df['uma_max'] = master_df['uma_max'].fillna(0).astype(float)
     master_df['uma_la'] = master_df['uma_la'].fillna(0).astype(float)
     master_df['uma_lc'] = master_df['uma_lc'].fillna(0).astype(float)
 
@@ -42,6 +43,7 @@ def generar_reglas_procesos_json(
         esq = row['esquema']
         mod = row['modalidad']
         la = row['linea_de_apoyo']
+        uma_max = row['uma_max']
         uma_la = row['uma_la']
         lc = row['linea_complementaria']
         uma_lc = row['uma_lc']
@@ -51,6 +53,7 @@ def generar_reglas_procesos_json(
         # Crea el nodo principal la primera vez que encuentro la combinación.
         if clave_jerarquia not in lineas_autorizadas:
             lineas_autorizadas[clave_jerarquia] = {
+                "uma_max": uma_max,
                 "uma_la": uma_la,
                 "complementarias_permitidas": {}
             }
