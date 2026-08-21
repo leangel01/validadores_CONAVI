@@ -55,6 +55,7 @@ class AprobacionesValidator(BaseValidator):
                 continue
 
             monto_apoyo = self._numero(fila.get('monto_linea_apoyo', 0))
+            monto_total = monto_apoyo
             complementarias = regla.get('complementarias_permitidas', {})
             complementarias_seleccionadas = []
 
@@ -71,6 +72,7 @@ class AprobacionesValidator(BaseValidator):
                     continue
 
                 complementarias_seleccionadas.append(nombre_linea)
+                monto_total += monto
                 maximo = complementarias.get(nombre_linea)
                 if maximo is None:
                     df.at[indice, 'observaciones_sistema'] += (
@@ -97,6 +99,35 @@ class AprobacionesValidator(BaseValidator):
                     f'{regla["uma_la"] * self.uma_mensual:.2f} pesos '
                     f'({regla["uma_la"]} UMAs)] '
                 )
+
+            if 'monto_aprobado' in df.columns:
+                monto_aprobado = self._numero(fila.get('monto_aprobado', 0))
+                if complementarias_seleccionadas:
+                    tope_maximo = regla.get('uma_max', 0) * self.uma_mensual
+                    if monto_total > tope_maximo:
+                        df.at[indice, 'observaciones_sistema'] += (
+                            f'[ERR: La suma de línea de apoyo y complementarias supera el máximo de '
+                            f'{tope_maximo:.2f} pesos ({regla.get("uma_max", 0)} UMAs)] '
+                        )
+                    monto_a_comparar = monto_total
+                    concepto_monto = 'La suma de línea de apoyo y complementarias'
+                else:
+                    monto_a_comparar = monto_apoyo
+                    concepto_monto = 'El monto de línea de apoyo'
+
+                if abs(monto_a_comparar - monto_aprobado) > 0.01:
+                    df.at[indice, 'observaciones_sistema'] += (
+                        f'[ERR: {concepto_monto} ({monto_a_comparar:.2f} pesos) '
+                        f'no coincide con el monto aprobado '
+                        f'({monto_aprobado:.2f} pesos)] '
+                    )
+            elif complementarias_seleccionadas:
+                tope_maximo = regla.get('uma_max', 0) * self.uma_mensual
+                if monto_total > tope_maximo:
+                    df.at[indice, 'observaciones_sistema'] += (
+                        f'[ERR: La suma de línea de apoyo y complementarias supera el máximo de '
+                        f'{tope_maximo:.2f} pesos ({regla.get("uma_max", 0)} UMAs)] '
+                    )
 
         return df
     

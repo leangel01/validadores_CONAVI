@@ -203,12 +203,18 @@
     "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE SUELO": {
       "uma_max": 86.0,
       "uma_la": 86.0,
-      "complementarias_permitidas": {}
+      "complementarias_permitidas": {
+        "ESTUDIOS Y DICTÁMENES": 20.0,
+        "TRÁMITES LEGALES": 16.0
+      }
     },
     "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|ADQUISICIÓN DE SUELO": {
       "uma_max": 86.0,
       "uma_la": 86.0,
-      "complementarias_permitidas": {}
+      "complementarias_permitidas": {
+        "ESTUDIOS Y DICTÁMENES": 20.0,
+        "TRÁMITES LEGALES": 16.0
+      }
     },
     "COFINANCIAMIENTO SIN CRÉDITO|REUBICACIÓN DE VIVIENDA|VIVIENDA NUEVA": {
       "uma_max": 150.0,
