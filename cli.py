@@ -25,7 +25,15 @@ from pathlib import Path
 
 def main():
 
-    print("=== SISTEMA DE VALIDACIÓN (MÓDULO APROBACIONES) ===")
+    opciones = {'1': 'APROBACIONES', '2': 'MODIFICACIONES'}
+    print("=== MÓDULO DE VALIDACIONES ===")
+    print("1. Aprobaciones")
+    print("2. Modificaciones")
+    tipo_proceso = opciones.get(input("Selecciona el tipo de validación [1/2]: ").strip())
+    if tipo_proceso is None:
+        print("Opción no válida.")
+        return
+    print(f"=== VALIDACIÓN DE {tipo_proceso} ===")
     
     ruta = seleccionar_archivo()
     if not ruta:
@@ -34,25 +42,24 @@ def main():
 
     try:
 
-        reader, ValidatorClass = ProcessFactory.obtener_componentes("APROBACIONES")
+        reader, ValidatorClass = ProcessFactory.obtener_componentes(tipo_proceso)
 
         print("Cargando y estructurando plantilla...")
-        df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja="APROBACIONES")
+        df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja=tipo_proceso)
 
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
         df_resultado = validador.validar()
         # Se seleccionan solo los registros inválidos y las columnas útiles para revisarlos.
-        df_salida = df_resultado.loc[
-            ~df_resultado['es_valido'], ['no.', 'curp', 'observaciones_sistema']
-        ].copy()
+        columnas_salida = ['no.', 'curp', 'observaciones_sistema']
+        df_salida = df_resultado.loc[~df_resultado['es_valido'], columnas_salida].copy()
         df_salida['observaciones_sistema'] = df_salida['observaciones_sistema'].str.findall(
             r'\[ERR:.*?\]'
         )
         df_salida = df_salida.explode('observaciones_sistema', ignore_index=True)
 
         ruta_salida = Path(ruta).with_name(f"{Path(ruta).stem}_resultado.xlsx")
-        df_salida.to_excel(ruta_salida, index=False, sheet_name="APROBACIONES")
+        df_salida.to_excel(ruta_salida, index=False, sheet_name=tipo_proceso)
         print(f"Resultado guardado en: {ruta_salida}")
 
         # Muestra un resumen para que el usuario conozca el resultado sin abrir el Excel.

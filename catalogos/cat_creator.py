@@ -36,6 +36,9 @@ def generar_reglas_procesos_json(
     master_df['uma_la'] = master_df['uma_la'].fillna(0).astype(float)
     master_df['uma_lc'] = master_df['uma_lc'].fillna(0).astype(float)
 
+    #crea el catalogo completo en un solo excel
+    #master_df.to_excel("./catalogos/CATALOGO_LINEAS_VALIDAS8_completo.xlsx", index=False)
+
     # Se indexa cada combinación por ESQUEMA|MODALIDAD|LINEA_APOYO.
     lineas_autorizadas = {}
 

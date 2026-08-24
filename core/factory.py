@@ -5,7 +5,9 @@ corresponden. Así, la interfaz principal no necesita conocer sus detalles.
 """
 
 from core.readers.aprobaciones import AprobacionesReader
+from core.readers.modificaciones import ModificacionesReader
 from core.validadores.aprobaciones import AprobacionesValidator
+from core.validadores.modificaciones import ModificacionesValidator
 
 class ProcessFactory:
     """Relacion de cada proceso con su lector y su clase validadora."""
@@ -14,8 +16,11 @@ class ProcessFactory:
         "APROBACIONES": {
             "reader": AprobacionesReader,
             "validator": AprobacionesValidator
+        },
+        "MODIFICACIONES": {
+            "reader": ModificacionesReader,
+            "validator": ModificacionesValidator
         }
-        # Próximamente: "MODIFICACIONES", "CANCELACIONES"
     }
 
     @classmethod

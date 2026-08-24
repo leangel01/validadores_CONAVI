@@ -14,6 +14,14 @@ from core.base import BaseValidator
 class AprobacionesValidator(BaseValidator):
     """Valida cada registro conforme a las reglas de aprobaciones."""
 
+    @staticmethod
+    def _formatear_monto(valor) -> str:
+        return f'{valor:,.2f}'
+
+    @staticmethod
+    def _supera_tope(valor: float, tope: float) -> bool:
+        return round(valor, 2) > round(tope, 2)
+
     def __init__(self, df: pd.DataFrame, config: dict = None):
         """Inicializa las reglas comunes y carga el catálogo del proceso."""
         super().__init__(df, config)
@@ -82,10 +90,10 @@ class AprobacionesValidator(BaseValidator):
                     df.at[indice, 'observaciones_sistema'] += (
                         f'[ERR: Monto requerido para línea complementaria {nombre_linea}] '
                     )
-                elif monto > maximo * self.uma_mensual:
+                elif self._supera_tope(monto, maximo * self.uma_mensual):
                     df.at[indice, 'observaciones_sistema'] += (
                     f'[ERR: Monto de {nombre_linea} supera el máximo de '
-                    f'{maximo * self.uma_mensual:.2f} pesos ({maximo} UMAs)] '
+                    f'{self._formatear_monto(maximo * self.uma_mensual)} pesos ({maximo} UMAs)] '
                     )
 
             if monto_apoyo <= 0:
@@ -93,10 +101,10 @@ class AprobacionesValidator(BaseValidator):
                     df.at[indice, 'observaciones_sistema'] += (
                         '[ERR: Monto de línea de apoyo requerido cuando no hay complementarias] '
                     )
-            elif monto_apoyo > regla.get('uma_la', 0) * self.uma_mensual:
+            elif self._supera_tope(monto_apoyo, regla.get('uma_la', 0) * self.uma_mensual):
                 df.at[indice, 'observaciones_sistema'] += (
                     f'[ERR: Monto de línea de apoyo supera el máximo de '
-                    f'{regla["uma_la"] * self.uma_mensual:.2f} pesos '
+                    f'{self._formatear_monto(regla["uma_la"] * self.uma_mensual)} pesos '
                     f'({regla["uma_la"]} UMAs)] '
                 )
 
@@ -104,10 +112,10 @@ class AprobacionesValidator(BaseValidator):
                 monto_aprobado = self._numero(fila.get('monto_aprobado', 0))
                 if complementarias_seleccionadas:
                     tope_maximo = regla.get('uma_max', 0) * self.uma_mensual
-                    if monto_total > tope_maximo:
+                    if self._supera_tope(monto_total, tope_maximo):
                         df.at[indice, 'observaciones_sistema'] += (
                             f'[ERR: La suma de línea de apoyo y complementarias supera el máximo de '
-                            f'{tope_maximo:.2f} pesos ({regla.get("uma_max", 0)} UMAs)] '
+                            f'{self._formatear_monto(tope_maximo)} pesos ({regla.get("uma_max", 0)} UMAs)] '
                         )
                     monto_a_comparar = monto_total
                     concepto_monto = 'La suma de línea de apoyo y complementarias'
@@ -123,10 +131,10 @@ class AprobacionesValidator(BaseValidator):
                     )
             elif complementarias_seleccionadas:
                 tope_maximo = regla.get('uma_max', 0) * self.uma_mensual
-                if monto_total > tope_maximo:
+                if self._supera_tope(monto_total, tope_maximo):
                     df.at[indice, 'observaciones_sistema'] += (
                         f'[ERR: La suma de línea de apoyo y complementarias supera el máximo de '
-                        f'{tope_maximo:.2f} pesos ({regla.get("uma_max", 0)} UMAs)] '
+                        f'{self._formatear_monto(tope_maximo)} pesos ({regla.get("uma_max", 0)} UMAs)] '
                     )
 
         return df
