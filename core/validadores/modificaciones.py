@@ -1,4 +1,4 @@
-"""Validaciones de CURP, alineación y montos para modificaciones."""
+
 
 import json
 from pathlib import Path
@@ -10,7 +10,7 @@ from core.common_rules import validar_mayoria_edad, validar_unicidad_curp
 
 
 class ModificacionesValidator(BaseValidator):
-    """Valida datos originales y cambios efectivos de una modificación."""
+    """Valida datos originales y cambios realizados en una modificación."""
 
     def __init__(self, df: pd.DataFrame, config: dict = None):
         super().__init__(df, config)

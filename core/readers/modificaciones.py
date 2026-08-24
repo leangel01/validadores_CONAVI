@@ -1,4 +1,4 @@
-"""Lector del layout de modificaciones S100."""
+"""Lector del layout de modificaciones"""
 
 import json
 import os
