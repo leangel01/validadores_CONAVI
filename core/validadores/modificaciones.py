@@ -115,7 +115,8 @@ class ModificacionesValidator(BaseValidator):
         suma = monto_apoyo_unico + monto_linea
 
         if self._supera_tope(monto_linea, limite_linea):
-            self._agregar_error(df, indice, f'Monto de línea de apoyo {sufijo or "original"} supera el máximo de {self._formatear_monto(limite_linea)} pesos')
+            ## agrega el nombre de la lína que supere el limite
+            self._agregar_error(df, indice, f'Monto de {self._texto(fila.get(f'linea_apoyo'))} {sufijo or "original"} supera el máximo de {self._formatear_monto(limite_linea)} pesos ({regla.get("uma_la", 0)} UMAs)')
 
         for numero in range(1, 8):
             nombre = self._texto(fila.get(f'linea_c{numero}{sufijo}', ''))
@@ -127,12 +128,12 @@ class ModificacionesValidator(BaseValidator):
             if maximo_umas is None:
                 self._agregar_error(df, indice, f'Línea complementaria no permitida: {nombre}')
             elif self._supera_tope(monto, maximo_umas * self.uma_mensual):
-                self._agregar_error(df, indice, f'Monto de {nombre} {sufijo or "original"} supera el máximo de {self._formatear_monto(maximo_umas * self.uma_mensual)} pesos')
+                self._agregar_error(df, indice, f'Monto de {nombre} {sufijo or "original"} supera el máximo de {self._formatear_monto(maximo_umas * self.uma_mensual)} pesos ({maximo_umas} UMAs)')
 
         if abs(round(suma - monto_total, 2)) > 0.01:
             self._agregar_error(df, indice, f'La suma de línea de apoyo y complementarias ({self._formatear_monto(suma)}) no coincide con el monto total ({self._formatear_monto(monto_total)})')
         if self._supera_tope(suma, limite_total):
-            self._agregar_error(df, indice, f'La suma de línea de apoyo y complementarias supera el máximo de {self._formatear_monto(limite_total)} pesos')
+            self._agregar_error(df, indice, f'La suma de línea de apoyo y complementarias supera el máximo de {self._formatear_monto(limite_total)} pesos ({regla.get("uma_max", 0)} UMAs)')
 
     def _validar_alineacion(self, df, indice, esquema, modalidad, linea, tipo):
         regla = self._obtener_regla(esquema, modalidad, linea)
