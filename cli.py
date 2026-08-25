@@ -22,6 +22,7 @@ Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la in
 from core.readers.aprobaciones import seleccionar_archivo
 from core.factory import ProcessFactory
 from pathlib import Path
+import pandas as pd
 
 def main():
 
@@ -59,7 +60,16 @@ def main():
         df_salida = df_salida.explode('observaciones_sistema', ignore_index=True)
 
         ruta_salida = Path(ruta).with_name(f"{Path(ruta).stem}_resultado.xlsx")
-        df_salida.to_excel(ruta_salida, index=False, sheet_name=tipo_proceso)
+        df_homologacion = getattr(
+            reader,
+            'reporte_homologacion',
+            pd.DataFrame(
+                columns=['columna', 'original', 'homologado', 'cantidad_ajustes']
+            ),
+        )
+        with pd.ExcelWriter(ruta_salida) as escritor:
+            df_salida.to_excel(escritor, index=False, sheet_name=tipo_proceso)
+            df_homologacion.to_excel(escritor, index=False, sheet_name='homologación')
         print(f"Resultado guardado en: {ruta_salida}")
 
         # Muestra un resumen para que el usuario conozca el resultado sin abrir el Excel.

@@ -19,6 +19,14 @@ class ModificacionesReader:
             config = json.load(archivo)
 
         self.mapa_columnas = config.get('cols_modificaciones_S100', {})
+        self.homologacion_esquemas = {
+            str(opcion).strip().upper(): str(esquema).strip().upper()
+            for esquema, opciones in config.get('homologacion_esquemas', {}).items()
+            for opcion in opciones
+        }
+        self.reporte_homologacion = pd.DataFrame(
+            columns=['columna', 'original', 'homologado', 'cantidad_ajustes']
+        )
         self.sinonimos_catalogos = {
             str(sinonimo).strip().upper()
             for sinonimos in self.mapa_columnas.values()
@@ -136,6 +144,22 @@ class ModificacionesReader:
                 df[columna].fillna('').astype(str)
                 .str.replace(r'\.0$', '', regex=True).str.strip()
             )
+        if 'esquema' in df.columns:
+            valores_originales = df['esquema'].copy()
+            valores_homologados = valores_originales.str.upper().replace(self.homologacion_esquemas)
+            cambios = valores_originales != valores_homologados
+            if cambios.any():
+                self.reporte_homologacion = (
+                    pd.DataFrame({
+                        'columna': 'esquema',
+                        'original': valores_originales[cambios],
+                        'homologado': valores_homologados[cambios],
+                    })
+                    .groupby(['columna', 'original', 'homologado'], dropna=False)
+                    .size()
+                    .reset_index(name='cantidad_ajustes')
+                )
+            df['esquema'] = valores_homologados
         for columna in self.cols_numericas:
             valores = df[columna].astype(object)
             if columna.endswith('_modificado'):

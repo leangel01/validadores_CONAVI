@@ -83,7 +83,14 @@
     "monto_linea_c6_modificado":["NUEVO MONTO LÍNEA DE APOYO COMPLEMENTARIA 6 ($)","MONTO NUEVA LÍNEA DE APOYO COMPLEMENTARIA 6 ($)"],
     "linea_c7":["LÍNEA DE APOYO COMPLEMENTARIA 7"],
     "monto_linea_c7":["MONTO LÍNEA DE APOYO COMPLEMENTARIA 7 ($)"],
-    "linea_c7_modificado":["NUEVA LÍNEA DE APOYO COMPLEMENTARIA 7"],
-    "monto_linea_c7_modificado":["NUEVO MONTO LÍNEA DE APOYO COMPLEMENTARIA 7 ($)"]
+    "linea_c7_modificado":["NUEVA LÍNEA DE APOYO COMPLEMENTARIA 7"]
+  },
+  "homologacion_esquemas": {
+    "SUBSIDIO 100% CONAVI": [
+      "S100",
+      "SUBSIDIO 100%",
+      "S100% CONAVI",
+      "SUBSIDIO 100% CONAVI"
+    ]
   }
 }
