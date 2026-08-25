@@ -63,7 +63,8 @@ class AprobacionesValidator(BaseValidator):
                 continue
 
             monto_apoyo = self._numero(fila.get('monto_linea_apoyo', 0))
-            monto_total = monto_apoyo
+            monto_apoyo_unico = self._numero(fila.get('apoyo_unico', 0))
+            monto_total = monto_apoyo_unico + monto_apoyo
             complementarias = regla.get('complementarias_permitidas', {})
             complementarias_seleccionadas = []
 
@@ -110,7 +111,7 @@ class AprobacionesValidator(BaseValidator):
 
             if 'monto_aprobado' in df.columns:
                 monto_aprobado = self._numero(fila.get('monto_aprobado', 0))
-                if complementarias_seleccionadas:
+                if complementarias_seleccionadas or monto_apoyo_unico > 0:
                     tope_maximo = regla.get('uma_max', 0) * self.uma_mensual
                     if self._supera_tope(monto_total, tope_maximo):
                         df.at[indice, 'observaciones_sistema'] += (

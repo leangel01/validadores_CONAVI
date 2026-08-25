@@ -62,6 +62,17 @@ class ModificacionesValidator(BaseValidator):
         except (TypeError, ValueError):
             return 0.0
 
+    @classmethod
+    def _monto_efectivo_complementaria(cls, fila, numero):
+        linea_original = fila.get(f'linea_c{numero}', '')
+        linea_modificada = fila.get(f'linea_c{numero}_modificado', '')
+        monto_original = fila.get(f'monto_linea_c{numero}', 0)
+        monto_modificado = fila.get(f'monto_linea_c{numero}_modificado', '')
+
+        if cls._es_sin_cambio(linea_modificada) and cls._es_sin_cambio(monto_modificado):
+            return cls._valor_efectivo(monto_original, '')
+        return cls._valor_efectivo(monto_original, monto_modificado)
+
     @staticmethod
     def _agregar_error(df, indice, mensaje):
         df.at[indice, 'observaciones_sistema'] += f'[ERR: {mensaje}] '
@@ -95,12 +106,13 @@ class ModificacionesValidator(BaseValidator):
                 self._agregar_error(df, indice, 'CURP nueva duplicada')
 
     def _validar_version(self, fila, indice, df, sufijo, regla):
+        monto_apoyo_unico = self._numero(fila.get(f'apoyo_unico{sufijo}', 0))
         monto_linea = self._numero(fila.get(f'monto_linea_apoyo{sufijo}', 0))
         monto_total = self._numero(fila.get(f'monto_total{sufijo}', 0))
         limite_linea = regla.get('uma_la', 0) * self.uma_mensual
         limite_total = regla.get('uma_max', 0) * self.uma_mensual
         complementarias = regla.get('complementarias_permitidas', {})
-        suma = monto_linea
+        suma = monto_apoyo_unico + monto_linea
 
         if self._supera_tope(monto_linea, limite_linea):
             self._agregar_error(df, indice, f'Monto de línea de apoyo {sufijo or "original"} supera el máximo de {self._formatear_monto(limite_linea)} pesos')
@@ -147,11 +159,12 @@ class ModificacionesValidator(BaseValidator):
                     continue
 
             fila_efectiva = fila.copy()
+            fila_efectiva['apoyo_unico_modificado'] = self._valor_efectivo(fila.get('apoyo_unico', 0), fila.get('apoyo_unico_modificado', 0))
             fila_efectiva['monto_total_modificado'] = self._valor_efectivo(fila.get('monto_total', 0), fila.get('monto_total_modificado', 0))
             fila_efectiva['monto_linea_apoyo_modificado'] = self._valor_efectivo(fila.get('monto_linea_apoyo', 0), fila.get('monto_linea_apoyo_modificado', 0))
             for numero in range(1, 8):
                 fila_efectiva[f'linea_c{numero}_modificado'] = self._valor_efectivo(fila.get(f'linea_c{numero}', ''), fila.get(f'linea_c{numero}_modificado', ''), es_texto=True)
-                fila_efectiva[f'monto_linea_c{numero}_modificado'] = self._valor_efectivo(fila.get(f'monto_linea_c{numero}', 0), fila.get(f'monto_linea_c{numero}_modificado', 0))
+                fila_efectiva[f'monto_linea_c{numero}_modificado'] = self._monto_efectivo_complementaria(fila, numero)
             self._validar_version(fila_efectiva, indice, df, '_modificado', regla_efectiva)
         return df
 
