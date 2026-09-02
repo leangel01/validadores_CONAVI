@@ -9,5 +9,7 @@ Este proyecto realiza la validacíon de las aprobaciones y modificaciones de acc
 ## Uso del validador
 1. Instalar Anaconda Navigator
 2. Agregar el path a las variables de entorno del sistema
-    * La  
-3. 
+    * La  ruta debe de ser C:\Users\%USERNAME%\AppData\Local\anaconda3\condabin
+3. Validar la instalación de las dependencias, el listado se encuentra en el 
+documento **requirements.txt**
+4. Una vez validado que las dependencias han sido instaladas, se puede ejecutar el validador mediante el archivo **ejecutar_validador.bat**
