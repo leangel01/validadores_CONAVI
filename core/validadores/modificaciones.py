@@ -116,7 +116,15 @@ class ModificacionesValidator(BaseValidator):
 
         if self._supera_tope(monto_linea, limite_linea):
             ## agrega el nombre de la lína que supere el limite
-            self._agregar_error(df, indice, f'Monto de {self._texto(fila.get(f'linea_apoyo'))} {sufijo or "original"} supera el máximo de {self._formatear_monto(limite_linea)} pesos ({regla.get("uma_la", 0)} UMAs)')
+            linea_apoyo = self._texto(fila.get('linea_apoyo', ''))
+            version = sufijo or 'original'
+            self._agregar_error(
+                df,
+                indice,
+                f'Monto de {linea_apoyo} {version} supera el máximo de '
+                f'{self._formatear_monto(limite_linea)} pesos '
+                f'({regla.get("uma_la", 0)} UMAs)',
+            )
 
         for numero in range(1, 8):
             nombre = self._texto(fila.get(f'linea_c{numero}{sufijo}', ''))
