@@ -10,7 +10,7 @@ import json
 import pandas as pd
 
 def generar_reglas_procesos_json(
-    ruta_excel: str = "./catalogos/CATALOGO_LINEAS_VALIDAS_21082026.xlsx",
+    ruta_excel: str = "./catalogos/CATALOGO_LINEAS_VALIDAS_03092026.xlsx",
     ruta_salida: str = "./catalogos/reglas_procesos.json"
 ):
     """Aquí se genera el archivo ``reglas_procesos.json`` a partir del catálogo de Excel."""

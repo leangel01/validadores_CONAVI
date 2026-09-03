@@ -13,11 +13,11 @@ class ProcessFactory:
     """Relacion de cada proceso con su lector y su clase validadora."""
 
     _REGISTRO = {
-        "APROBACIONES": {
+        "APROBACIONES S100": {
             "reader": AprobacionesReader,
             "validator": AprobacionesValidator
         },
-        "MODIFICACIONES": {
+        "MODIFICACIONES S100": {
             "reader": ModificacionesReader,
             "validator": ModificacionesValidator
         }

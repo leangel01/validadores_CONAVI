@@ -5,7 +5,9 @@ Este proyecto realiza la validacíon de las aprobaciones y modificaciones de acc
     [1] Aprobaciones S100
 
     [2] Modificaciones S100
-
+Se encuentra en desarrollo los módulos de aprobaciones y modificaciones para el esquema de Vivienda para el Bienestar.
+##  Changelog
+* **03/09/2026** &emsp;&emsp; Ajustes en el menú de selección, se especificó que las implementaciones actuales corresponde al esquema de Subsidio 100% Conavi.
 ## Uso del validador
 1. Instalar Anaconda Navigator
 2. Agregar el path a las variables de entorno del sistema
