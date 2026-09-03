@@ -13,13 +13,15 @@ class ProcessFactory:
     """Relacion de cada proceso con su lector y su clase validadora."""
 
     _REGISTRO = {
-        "APROBACIONES": {
+        "APROBACIONES S100": {
             "reader": AprobacionesReader,
-            "validator": AprobacionesValidator
+            "validator": AprobacionesValidator,
+            "sheet_name": "APROBACIONES"
         },
-        "MODIFICACIONES": {
+        "MODIFICACIONES S100": {
             "reader": ModificacionesReader,
-            "validator": ModificacionesValidator
+            "validator": ModificacionesValidator,
+            "sheet_name": "MODIFICACIONES"
         }
     }
 
@@ -35,4 +37,4 @@ class ProcessFactory:
             raise ValueError(f"Proceso '{tipo_proceso}' no registrado. Opciones: {list(cls._REGISTRO.keys())}")
 
         comp = cls._REGISTRO[key]
-        return comp["reader"](), comp["validator"]
+        return comp["reader"](), comp["validator"], comp["sheet_name"]

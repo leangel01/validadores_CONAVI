@@ -22,11 +22,20 @@ Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la in
 from core.readers.aprobaciones import seleccionar_archivo
 from core.factory import ProcessFactory
 from pathlib import Path
+import warnings
 import pandas as pd
+
+
+warnings.filterwarnings(
+    "ignore",
+    message=r"Cannot parse header or footer so it will be ignored",
+    category=UserWarning,
+    module=r"openpyxl\.worksheet\.header_footer",
+)
 
 def main():
 
-    opciones = {'1': 'APROBACIONES', '2': 'MODIFICACIONES'}
+    opciones = {'1': 'APROBACIONES S100', '2': 'MODIFICACIONES S100'}
     print("=== MÓDULO DE VALIDACIONES ===")
     print("1. Aprobaciones S100")
     print("2. Modificaciones S100")
@@ -43,10 +52,10 @@ def main():
 
     try:
 
-        reader, ValidatorClass = ProcessFactory.obtener_componentes(tipo_proceso)
+        reader, ValidatorClass, SheetName = ProcessFactory.obtener_componentes(tipo_proceso)
 
         print("Cargando y estructurando plantilla...")
-        df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja=tipo_proceso)
+        df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja=SheetName)
 
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
