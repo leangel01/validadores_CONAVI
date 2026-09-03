@@ -26,7 +26,7 @@ import pandas as pd
 
 def main():
 
-    opciones = {'1': 'APROBACIONES S100', '2': 'MODIFICACIONES S100'}
+    opciones = {'1': 'APROBACIONES', '2': 'MODIFICACIONES'}
     print("=== MÓDULO DE VALIDACIONES ===")
     print("1. Aprobaciones S100")
     print("2. Modificaciones S100")
