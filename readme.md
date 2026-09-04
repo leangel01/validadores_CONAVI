@@ -1,6 +1,6 @@
 # Validador de acciones de vivienda CONAVI
 
-Este proyecto realiza la validacíon de las aprobaciones y modificaciones de acciones de vivienda acorde a las reglas de opreacion 2026, actualmente tiene disponible dos opciones:
+Este proyecto realiza la validacíon de las aprobaciones y modificaciones de acciones de vivienda acorde a las reglas de opreacion 2026, actualmente tiene disponible las siguientes opciones:
 
     [1] Aprobaciones S100
 
@@ -11,11 +11,11 @@ El módulo de modificaciones para el esquema de Vivienda para el Bienestar se en
 ##  Historial de cambios
 **04/09/2026** 
 
-* Integración del módulo de validaciones para las aprobaciones del esquema de Vivienda para el Bienestar .
+* Integración del módulo de validaciones para las aprobaciones del esquema de Vivienda para el Bienestar.
 
 **03/09/2026** 
 
-* Ajustes en el menú de selección, se especificó que las implementaciones actuales corresponde al esquema de Subsidio 100% Conavi.
+* Ajustes en el menú de selección, se especificó que las implementaciones corresponde al esquema de Subsidio 100% Conavi.
 * Incorporación de nuevas línes de apoyo y sus complementarias en el catálogo de alineación para las modalidades rehubicación y adquisición del esquema PVB.
 ## Uso del validador
 1. Instalar Anaconda Navigator
