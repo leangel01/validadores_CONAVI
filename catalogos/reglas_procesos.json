@@ -285,9 +285,13 @@
         "OBRAS EXTERIORES": 90.0,
         "ESPACIO AUXILIAR PRODUCTIVO": 25.0,
         "ESTUDIOS Y DICTÁMENES": 20.0,
-        "PROYECTO EJECUTIVO": 13.0,
         "TRÁMITES LEGALES": 16.0
       }
+    },
+    "VIVIENDA PARA EL BIENESTAR|REUBICACIÓN DE VIVIENDA|PROYECTO EJECUTIVO": {
+      "uma_max": 13.0,
+      "uma_la": 13.0,
+      "complementarias_permitidas": {}
     },
     "SUBSIDIO 100% CONAVI|REUBICACIÓN DE VIVIENDA|EDIFICACIÓN DE CONJUNTO HABITACIONAL": {
       "uma_max": 330.0,

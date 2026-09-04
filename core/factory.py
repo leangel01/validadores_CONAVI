@@ -6,8 +6,10 @@ corresponden. Así, la interfaz principal no necesita conocer sus detalles.
 
 from core.readers.aprobaciones import AprobacionesReader
 from core.readers.modificaciones import ModificacionesReader
+from core.readers.aprobaciones_pvb import AprobacionesPVBReader
 from core.validadores.aprobaciones import AprobacionesValidator
 from core.validadores.modificaciones import ModificacionesValidator
+from core.validadores.aprobaciones_pvb import AprobacionesPVBValidator
 
 class ProcessFactory:
     """Relacion de cada proceso con su lector y su clase validadora."""
@@ -22,6 +24,11 @@ class ProcessFactory:
             "reader": ModificacionesReader,
             "validator": ModificacionesValidator,
             "sheet_name": "MODIFICACIONES"
+        },
+        "APROBACIONES PVB": {
+            "reader": AprobacionesPVBReader,
+            "validator": AprobacionesPVBValidator,
+            "sheet_name": "APROBACIONES"
         }
     }
 

@@ -86,6 +86,32 @@
     "linea_c7_modificado":["NUEVA LÍNEA DE APOYO COMPLEMENTARIA 7"],
     "monto_linea_c7_modificado":["NUEVO MONTO LÍNEA DE APOYO COMPLEMENTARIA 7 ($)","MONTO NUEVA LÍNEA DE APOYO COMPLEMENTARIA 7 ($)"]
   },
+  "cols_aprobaciones_pvb": {
+    "no.":["NO."],
+    "id":["ID PROYECTO"],
+    "esquema":["ESQUEMA OPERATIVO"],
+    "total_viviendas":["NÚMERO DE VIVIENDAS"],
+    "modalidad":["MODALIDAD","MODALIDAD1"],
+    "linea_apoyo_1":["SUELO_LÍNEA APOYO"],
+    "monto_linea_apoyo_1":["SUELO_MONTO LÍNEA APOYO ($)"],
+    "linea_apoyo_2":["PROYECTO EJECUTIVO_LÍNEA APOYO"],
+    "monto_linea_apoyo_2":["PROYECTO EJECUTIVO_MONTO LÍNEA APOYO ($)"],
+    "linea_apoyo_3":["ESTUDIOS Y DICTÁMENES_LÍNEA APOYO"],
+    "monto_linea_apoyo_3":["ESTUDIOS Y DICTÁMENES_MONTO LÍNEA APOYO ($)"],
+    "linea_apoyo_4":["VIVIENDA_LÍNEA APOYO"],
+    "monto_linea_apoyo_4":["VIVIENDA_MONTO LÍNEA APOYO ($)"],
+    "linea_complementaria_1":["COMPLEMENTOS - VIVIENDA_LÍNEA APOYO COMPL 1"],
+    "monto_linea_complementaria_1":["COMPLEMENTOS - VIVIENDA_MONTO LÍNEA APOYO COMPL 1 ($)"],
+    "linea_complementaria_2":["COMPLEMENTOS - VIVIENDA_LÍNEA APOYO COMPL 2"],
+    "monto_linea_complementaria_2":["COMPLEMENTOS - VIVIENDA_MONTO LÍNEA APOYO COMPL 2 ($)"],
+    "linea_complementaria_3":["COMPLEMENTOS - VIVIENDA_LÍNEA APOYO COMPL 3"],
+    "monto_linea_complementaria_3":["COMPLEMENTOS - VIVIENDA_MONTO LÍNEA APOYO COMPL 3 ($)"],
+    "linea_complementaria_4":["OBRA EXTERIOR_LÍNEA APOYO"],
+    "monto_linea_complementaria_4":["OBRA EXTERIOR_MONTO LÍNEA APOYO ($)"],
+    "linea_complementaria_5":["TRAMITES LEGALES_LÍNEA APOYO"],
+    "monto_linea_complementaria_5":["TRAMITES LEGALES_MONTO LÍNEA APOYO ($)"],
+    "total_monto_aprobado":["APROBACIÓN_MONTO TOTAL APROBADO ($)"]
+  },
   "homologacion_esquemas": {
     "SUBSIDIO 100% CONAVI": [
       "S100",

@@ -5,8 +5,14 @@ Este proyecto realiza la validacíon de las aprobaciones y modificaciones de acc
     [1] Aprobaciones S100
 
     [2] Modificaciones S100
-Se encuentra en desarrollo los módulos de aprobaciones y modificaciones para el esquema de Vivienda para el Bienestar.
+
+    [3] Aprobaciones PVB
+El módulo de modificaciones para el esquema de Vivienda para el Bienestar se encuentra en desarrollo.
 ##  Historial de cambios
+**04/09/2026** 
+
+* (PRELIMINAR) Integración del módulo de validaciones para el esquema de Vivienda para el Bienestar .
+
 **03/09/2026** 
 
 * Ajustes en el menú de selección, se especificó que las implementaciones actuales corresponde al esquema de Subsidio 100% Conavi.

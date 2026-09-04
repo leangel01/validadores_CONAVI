@@ -20,6 +20,7 @@ Actulmente, solo se soporta el proceso de APROBACIONES, quedando pendiente la in
 """
 
 from core.readers.aprobaciones import seleccionar_archivo
+from core.readers.aprobaciones_pvb import seleccionar_archivo_pvb
 from core.factory import ProcessFactory
 from pathlib import Path
 import warnings
@@ -35,17 +36,18 @@ warnings.filterwarnings(
 
 def main():
 
-    opciones = {'1': 'APROBACIONES S100', '2': 'MODIFICACIONES S100'}
+    opciones = {'1': 'APROBACIONES S100', '2': 'MODIFICACIONES S100', '3': 'APROBACIONES PVB'}
     print("=== MÓDULO DE VALIDACIONES ===")
     print("1. Aprobaciones S100")
     print("2. Modificaciones S100")
-    tipo_proceso = opciones.get(input("Selecciona el tipo de validación [1/2]: ").strip())
+    print("3. Aprobaciones PVB")
+    tipo_proceso = opciones.get(input("Selecciona el tipo de validación [1/2/3]: ").strip())
     if tipo_proceso is None:
         print("Opción no válida.")
         return
     print(f"=== VALIDACIÓN DE {tipo_proceso} ===")
     
-    ruta = seleccionar_archivo()
+    ruta = seleccionar_archivo_pvb() if tipo_proceso == 'APROBACIONES PVB' else seleccionar_archivo()
     if not ruta:
         print("No se seleccionó ningún archivo.")
         return
@@ -57,11 +59,17 @@ def main():
         print("Cargando y estructurando plantilla...")
         df_limpio = reader.cargar_y_preparar(ruta, nombre_hoja=SheetName)
 
+        if ValidatorClass is None:
+            print(f"Lectura y homologación completadas: {len(df_limpio)} registros.")
+            print(df_limpio.head())
+            return
+
         print(f"Ejecutando reglas de validación en {len(df_limpio)} registros...")
         validador = ValidatorClass(df_limpio)
         df_resultado = validador.validar()
         # Se seleccionan solo los registros inválidos y las columnas útiles para revisarlos.
-        columnas_salida = ['no.', 'curp', 'observaciones_sistema']
+        columna_identificador = 'id' if tipo_proceso == 'APROBACIONES PVB' else 'curp'
+        columnas_salida = ['no.', columna_identificador, 'observaciones_sistema']
         df_salida = df_resultado.loc[~df_resultado['es_valido'], columnas_salida].copy()
         df_salida['observaciones_sistema'] = df_salida['observaciones_sistema'].str.findall(
             r'\[ERR:.*?\]'
@@ -90,7 +98,7 @@ def main():
         df_errores = df_resultado[~df_resultado['es_valido']]
         if not df_errores.empty:
             print("\nPrimeros registros con errores:")
-            print(df_errores[['curp', 'observaciones_sistema']].head())
+            print(df_errores[[columna_identificador, 'observaciones_sistema']].head())
 
     except Exception as e:
         print(f"\n[Error durante el proceso]: {e}")
