@@ -109,7 +109,7 @@ class AprobacionesPVBValidator(BaseValidator):
                 self._agregar_error(
                     df,
                     indice,
-                    f"Monto de línea de apoyo {numero} supera el máximo de "
+                    f"Monto de línea de apoyo {linea} supera el máximo de "
                     f"{self._formatear_monto(tope)} pesos "
                     f'({regla.get("uma_la", 0)} UMAs por vivienda)',
                 )

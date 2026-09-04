@@ -11,7 +11,7 @@ El módulo de modificaciones para el esquema de Vivienda para el Bienestar se en
 ##  Historial de cambios
 **04/09/2026** 
 
-* (PRELIMINAR) Integración del módulo de validaciones para el esquema de Vivienda para el Bienestar .
+* Integración del módulo de validaciones para las aprobaciones del esquema de Vivienda para el Bienestar .
 
 **03/09/2026** 
 
